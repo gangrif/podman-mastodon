@@ -8,8 +8,6 @@
 #    - The various container images are locked to specific versions, this was suggested by the how-to I followed (linked on the next line) when standing up Mastodon
 #      - HOWTO: https://www.linode.com/docs/guides/install-mastodon-server-on-centos-stream/
 #    - You'll want to look up the latest versions of mastodon, redis, and postgres, and adjust accordingly.  
-#    - There are various environment settings.  You may be able to de-dupliucate these, they ended up tied to every mastodon container (as there are several for different purposes)
-#      - These variables are the config for your mastodon instance, you WILL need to modify them.  Ive tried to make them easy to identify.
 #    - The howto above also uses some static content from the mastodon git repo, you will need to incorporate that somehow, I put these containers behind nginx
 #       - nginx hosts that static content for me, and proxies to the containers.  You'll have to deal with that in kube if thats your goal.
 apiVersion: v1
