@@ -2,7 +2,9 @@ The goal of this repo is solely to share the work I did in setting up mastodon t
 
 podman lets you generate, and import kubernetes yaml definitions.  I created one for mastodon based on the information that is in the mastodon docker-compose file.  
 
-In mastodon-pod.yaml you will find the definition I use for my mastodon instance, with a lot of the specifics emptied out and replaced with placeholders.  Things like my database password, mail config, the keys that mastodon uses, all have been removed so you can populate these with your own info.  
+mastodon-configmaps.yaml holds the env variables that mastodon uses for its confit. 
+mastodon-pod.yaml depends on those configmaps, and contains all of the pod/container definitions, plus mappings from the env variables to the config map
+You will need to define volumes in podman for mastodon-vol-db, mastodon-vol-redis and mastodon-vol-pubsys
 
 I used the following how-to as a reference to get mastodon up and running, but of course ditched the docker/docker-compose stuff and leveraged my own podman knowledge to translate it.  
 
