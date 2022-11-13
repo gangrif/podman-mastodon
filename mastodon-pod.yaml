@@ -57,9 +57,9 @@ spec:
   containers:
   - args:
     - postgres
-    envFrom:
-    - configMapRef:
-      name: mastodon-env
+#    envFrom:
+#    - configMapRef:
+#      name: mastodon-env
     env:
     - name: POSTGRES_USER
       valueFrom:
@@ -109,9 +109,9 @@ spec:
       name: mastodon-vol-redis-pvc
   - command: ['node']
     args: ['./streaming']
-    envFrom:
-    - configMapRef:
-      name: mastodon-env
+#    envFrom:
+#    - configMapRef:
+#      name: mastodon-env
     env:
     - name: DB_USER
       valueFrom:
@@ -193,9 +193,9 @@ spec:
         - CAP_AUDIT_WRITE
   - command: ['bundle']
     args: ['exec', 'sidekiq']
-    envFrom:
-    - configMapRef:
-      name: mastodon-env
+#    envFrom:
+#    - configMapRef:
+#      name: mastodon-env
     env:
     - name: DB_USER
       valueFrom:
@@ -321,9 +321,9 @@ spec:
 
   - command: ['/bin/bash']
     args: ["-c", "rm -f /mastodon/tmp/pids/server.pid; bundle exec rails s -p 3000"]
-    envFrom:
-    - configMapRef:
-      name: mastodon-env
+#    envFrom:
+#    - configMapRef:
+#      name: mastodon-env
     env:
     - name: DB_USER
       valueFrom:
