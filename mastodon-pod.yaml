@@ -448,6 +448,7 @@ spec:
       name: mastodon-vol-pubsys-pvc
   restartPolicy: Never
   # Volumes for the various data you need persistent.  I used NFS volumes, you can use whatever, just make sure the names match what you define below
+  ### COMMENT THESE OUT OF YOU ARE USING LOCAL STORAGE INSTEAD OF PODMAN VOLUMES ###
   volumes:
   - name: mastodon-vol-db-pvc
     persistentVolumeClaim:
@@ -458,6 +459,21 @@ spec:
   - name: mastodon-vol-pubsys-pvc
     persistentVolumeClaim:
       claimName: mastodon-vol-pubsys
+
+# Below this line are local directory "hostpath" volumes created to mimmic the volume defs if you're using local storage instead.
+#  volumes:
+#  - hostPath:
+#      path: /srv/mastodon/db/
+#      type: Directory
+#    name: mastodon-vol-db-pvc
+#  - hostPath:
+#      path: /srv/mastodon/redis/
+#      type: Directory
+#    name: mastodon-vol-redis-pvc
+#  - hostPath:
+#      path: /srv/mastodon/pubsys/
+#      type: Directory
+#    name: mastodon-vol-pubsys-pvc
 
 status: {}
 
