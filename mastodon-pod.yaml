@@ -66,11 +66,11 @@ spec:
         configMapKeyRef:
           name: mastodon-env
           key: POSTGRES_USER
-    - name: POSTGRES_PASSWORD
+    - name: POSTGRES_PASS
       valueFrom:
         configMapKeyRef:
           name: mastodon-env
-          key: POSTGRES_PASSWORD
+          key: POSTGRES_PASS
     - name: POSTGRES_DB
       valueFrom:
         configMapKeyRef:
@@ -142,7 +142,7 @@ spec:
       valueFrom:
         configMapKeyRef:
           name: mastodon-env
-          key: DP_PORT
+          key: DB_PORT
     - name: DB_HOST
       valueFrom:
         configMapKeyRef:
@@ -159,7 +159,7 @@ spec:
           name: mastodon-env
           key: POSTGRES_PASS
     - name: REDIS_PORT
-          valueFrom:
+      valueFrom:
         configMapKeyRef:
           name: mastodon-env
           key: REDIS_PORT
@@ -231,7 +231,7 @@ spec:
       valueFrom:
         configMapKeyRef:
           name: mastodon-env
-          key: DP_PORT
+          key: DB_PORT
     - name: DB_HOST
       valueFrom:
         configMapKeyRef:
@@ -248,7 +248,7 @@ spec:
           name: mastodon-env
           key: POSTGRES_PASS
     - name: REDIS_PORT
-          valueFrom:
+      valueFrom:
         configMapKeyRef:
           name: mastodon-env
           key: REDIS_PORT
@@ -359,7 +359,7 @@ spec:
       valueFrom:
         configMapKeyRef:
           name: mastodon-env
-          key: DP_PORT
+          key: DB_PORT
     - name: DB_HOST
       valueFrom:
         configMapKeyRef:
@@ -376,7 +376,7 @@ spec:
           name: mastodon-env
           key: POSTGRES_PASS
     - name: REDIS_PORT
-          valueFrom:
+      valueFrom:
         configMapKeyRef:
           name: mastodon-env
           key: REDIS_PORT
