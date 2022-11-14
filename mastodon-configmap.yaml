@@ -17,7 +17,7 @@ data:
   # Site Config
   SECRET_KEY_BASE: "<YourGeneratedSecretKeyBase>"
   OTP_SECRET: "<YourGeneratedOTPSecret>"
-  LOCAL_DOMAIN: "social.undrground.org"
+  LOCAL_DOMAIN: "social.example.com"
   IP_RETENTION_PERIOD: "31556952"
   SESSION_RETENTION_PERIOD: "31556952"
   VAPID_PUBLIC_KEY: "<YourGeneratedVAPIDKey>"
