@@ -18,7 +18,7 @@ For kubernetes, i think you'll need to define some way to manage ingress, as I d
 
 ## Oauth and Vapid keys
 
-In (the howto above)[https://www.linode.com/docs/guides/install-mastodon-server-on-centos-stream/], there is information on how to generate the OAuth and Vapid keys that you will rquire (these go into the configmap once generated)
+In [the howto above](https://www.linode.com/docs/guides/install-mastodon-server-on-centos-stream/), there is information on how to generate the OAuth and Vapid keys that you will rquire (these go into the configmap once generated)
 
 ## File placement, and systemd
 
