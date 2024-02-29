@@ -1,0 +1,18 @@
+#Once modified to your environment, place this in /etc/containers/systemd
+# Then issue: systemctl daemon-reload
+# Then you should be able to systemctl start mastodon-pod
+## Note that I have found that sometimes services start out of order, and podman does not have a way to set the order. 
+## So, sometimes you'll need to do a podman pod start mastodon AFTER systemctl start mastodon-pod 
+[Install]
+WantedBy=default.target
+
+[Unit]
+
+[Kube]
+#Replace this path with the path to your mastodon-pod.yaml file
+Yaml=/srv/supporting-files/container-defs/mastodon/mastodon-pod.yaml
+PublishPort=3000:3000
+PublishPort=4000:4000
+PublishPort=9200:9200
+#Replace this path with the path to your mastodon-configmap.yaml 
+ConfigMap=/srv/supporting-files/container-defs/mastodon/mastodon-configmap.yaml

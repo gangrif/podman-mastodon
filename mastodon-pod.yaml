@@ -57,30 +57,10 @@ spec:
   containers:
   - args:
     - postgres
-#    envFrom:
-#    - configMapRef:
-#      name: mastodon-env
-    env:
-    - name: POSTGRES_USER
-      valueFrom:
-        configMapKeyRef:
-          name: mastodon-env
-          key: POSTGRES_USER
-    - name: POSTGRES_PASS
-      valueFrom:
-        configMapKeyRef:
-          name: mastodon-env
-          key: POSTGRES_PASS
-    - name: POSTGRES_DB
-      valueFrom:
-        configMapKeyRef:
-          name: mastodon-env
-          key: POSTGRES_DB
-    - name: POSTGRES_PASSWORD
-      valueFrom:
-        configMapKeyRef:
-          name: mastodon-env
-          key: POSTGRES_MASTER_PASS
+    envFrom:
+    - configMapRef:
+        name: mastodon-env
+        optional: false
     image: docker.io/library/postgres:14-alpine
     name: db
     ports:
@@ -114,81 +94,12 @@ spec:
       name: mastodon-vol-redis-pvc
   - command: ['node']
     args: ['./streaming']
-#    envFrom:
-#    - configMapRef:
-#      name: mastodon-env
-    env:
-    - name: DB_USER
-      valueFrom:
-        configMapKeyRef:
-          name: mastodon-env
-          key: POSTGRES_USER
-    - name: SECRET_KEY_BASE
-      valueFrom:
-        configMapKeyRef:
-          name: mastodon-env
-          key: SECRET_KEY_BASE
-    - name: LOCAL_DOMAIN
-      valueFrom:
-        configMapKeyRef:
-          name: mastodon-env
-          key: LOCAL_DOMAIN
-    - name: REDIS_HOST
-      valueFrom:
-        configMapKeyRef:
-          name: mastodon-env
-          key: REDIS_HOST
-    - name: IP_RETENTION_PERIOD
-      valueFrom:
-        configMapKeyRef:
-          name: mastodon-env
-          key: IP_RETENTION_PERIOD
-    - name: DB_PORT
-      valueFrom:
-        configMapKeyRef:
-          name: mastodon-env
-          key: DB_PORT
-    - name: DB_HOST
-      valueFrom:
-        configMapKeyRef:
-          name: mastodon-env
-          key: DB_HOST 
-    - name: DB_NAME
-      valueFrom:
-        configMapKeyRef:
-          name: mastodon-env
-          key: POSTGRES_DB
-    - name: DB_PASS
-      valueFrom:
-        configMapKeyRef:
-          name: mastodon-env
-          key: POSTGRES_PASS
-    - name: REDIS_PORT
-      valueFrom:
-        configMapKeyRef:
-          name: mastodon-env
-          key: REDIS_PORT
-    - name: SESSION_RETENTION_PERIOD
-      valueFrom:
-        configMapKeyRef:
-          name: mastodon-env
-          key: SESSION_RETENTION_PERIOD
-    - name: VAPID_PUBLIC_KEY
-      valueFrom:
-        configMapKeyRef:
-          name: mastodon-env
-          key: VAPID_PUBLIC_KEY
-    - name: VAPID_PRIVATE_KEY
-      valueFrom:
-        configMapKeyRef:
-          name: mastodon-env
-          key: VAPID_PRIVATE_KEY
-    - name: OTP_SECRET
-      valueFrom:
-        configMapKeyRef:
-          name: mastodon-env
-          key: OTP_SECRET
-    image: docker.io/tootsuite/mastodon:v3.5.3
+    envFrom:
+    - configMapRef:
+        name: mastodon-env
+        optional: false
+
+    image: docker.io/tootsuite/mastodon:v4.2.8
     name: streaming
     resources: {}
     securityContext:
@@ -198,121 +109,12 @@ spec:
         - CAP_AUDIT_WRITE
   - command: ['bundle']
     args: ['exec', 'sidekiq']
-#    envFrom:
-#    - configMapRef:
-#      name: mastodon-env
-    env:
-    - name: DB_USER
-      valueFrom:
-        configMapKeyRef:
-          name: mastodon-env
-          key: POSTGRES_USER
-    - name: SMTP_FROM_ADDRESS
-      valueFrom:
-        configMapKeyRef:
-          name: mastodon-env
-          key: SMTP_FROM_ADDRESS 
-    - name: SECRET_KEY_BASE
-      valueFrom:
-        configMapKeyRef:
-          name: mastodon-env
-          key: SECRET_KEY_BASE
-    - name: LOCAL_DOMAIN
-      valueFrom:
-        configMapKeyRef:
-          name: mastodon-env
-          key: LOCAL_DOMAIN
-    - name: REDIS_HOST
-      valueFrom:
-        configMapKeyRef:
-          name: mastodon-env
-          key: REDIS_HOST
-    - name: IP_RETENTION_PERIOD
-      valueFrom:
-        configMapKeyRef:
-          name: mastodon-env
-          key: IP_RETENTION_PERIOD
-    - name: DB_PORT
-      valueFrom:
-        configMapKeyRef:
-          name: mastodon-env
-          key: DB_PORT
-    - name: DB_HOST
-      valueFrom:
-        configMapKeyRef:
-          name: mastodon-env
-          key: DB_HOST 
-    - name: DB_NAME
-      valueFrom:
-        configMapKeyRef:
-          name: mastodon-env
-          key: POSTGRES_DB
-    - name: DB_PASS
-      valueFrom:
-        configMapKeyRef:
-          name: mastodon-env
-          key: POSTGRES_PASS
-    - name: REDIS_PORT
-      valueFrom:
-        configMapKeyRef:
-          name: mastodon-env
-          key: REDIS_PORT
-    - name: SMTP_PORT
-      valueFrom:
-        configMapKeyRef:
-          name: mastodon-env
-          key: SMTP_PORT
-#    - name: SMTP_SSL
-#      valueFrom:
-#        configMapKeyRef:
-#          name: mastodon-env
-#          key: SMTP_SSL
-#    - name: SMTP_TLS
-#      valueFrom:
-#        configMapKeyRef:
-#          name: mastodon-env
-#          key: SMTP_TLS
-#    - name: SMTP_ENABLE_STARTTLS_AUTO
-#      valueFrom:
-#        configMapKeyRef:
-#          name: mastodon-env
-#          key: SMTP_ENABLE_STARTTLS_AUTO
-#    - name: SMTP_OPENSSL_VERIFY_MODE
-#      valueFrom:
-#        configMapKeyRef:
-#          name: mastodon-env
-#          key: SMTP_OPENSSL_VERIFY_MODE
-    - name: SMTP_DELIVERY_METHOD
-      valueFrom:
-        configMapKeyRef:
-          name: mastodon-env
-          key: SMTP_DELIVERY_METHOD
-    - name: SESSION_RETENTION_PERIOD
-      valueFrom:
-        configMapKeyRef:
-          name: mastodon-env
-          key: SESSION_RETENTION_PERIOD
-    - name: VAPID_PUBLIC_KEY
-      valueFrom:
-        configMapKeyRef:
-          name: mastodon-env
-          key: VAPID_PUBLIC_KEY
-    - name: SMTP_SERVER
-      valueFrom:
-        configMapKeyRef:
-          name: mastodon-env
-          key: SMTP_SERVER
-    - name: VAPID_PRIVATE_KEY
-      valueFrom:
-        configMapKeyRef:
-          name: mastodon-env
-          key: VAPID_PRIVATE_KEY
-    - name: OTP_SECRET
-      valueFrom:
-        configMapKeyRef:
-          name: mastodon-env
-          key: OTP_SECRET
-    image: docker.io/tootsuite/mastodon:v3.5.3
+    envFrom:
+    - configMapRef:
+        name: mastodon-env
+        optional: false
+
+    image: docker.io/tootsuite/mastodon:v4.2.8
     name: sidekiq
     resources: {}
     securityContext:
@@ -326,121 +128,11 @@ spec:
 
   - command: ['/bin/bash']
     args: ["-c", "rm -f /mastodon/tmp/pids/server.pid; bundle exec rails s -p 3000"]
-#    envFrom:
-#    - configMapRef:
-#      name: mastodon-env
-    env:
-    - name: DB_USER
-      valueFrom:
-        configMapKeyRef:
-          name: mastodon-env
-          key: POSTGRES_USER
-    - name: SMTP_FROM_ADDRESS
-      valueFrom:
-        configMapKeyRef:
-          name: mastodon-env
-          key: SMTP_FROM_ADDRESS 
-    - name: SECRET_KEY_BASE
-      valueFrom:
-        configMapKeyRef:
-          name: mastodon-env
-          key: SECRET_KEY_BASE
-    - name: LOCAL_DOMAIN
-      valueFrom:
-        configMapKeyRef:
-          name: mastodon-env
-          key: LOCAL_DOMAIN
-    - name: REDIS_HOST
-      valueFrom:
-        configMapKeyRef:
-          name: mastodon-env
-          key: REDIS_HOST
-    - name: IP_RETENTION_PERIOD
-      valueFrom:
-        configMapKeyRef:
-          name: mastodon-env
-          key: IP_RETENTION_PERIOD
-    - name: DB_PORT
-      valueFrom:
-        configMapKeyRef:
-          name: mastodon-env
-          key: DB_PORT
-    - name: DB_HOST
-      valueFrom:
-        configMapKeyRef:
-          name: mastodon-env
-          key: DB_HOST 
-    - name: DB_NAME
-      valueFrom:
-        configMapKeyRef:
-          name: mastodon-env
-          key: POSTGRES_DB
-    - name: DB_PASS
-      valueFrom:
-        configMapKeyRef:
-          name: mastodon-env
-          key: POSTGRES_PASS
-    - name: REDIS_PORT
-      valueFrom:
-        configMapKeyRef:
-          name: mastodon-env
-          key: REDIS_PORT
-    - name: SMTP_PORT
-      valueFrom:
-        configMapKeyRef:
-          name: mastodon-env
-          key: SMTP_PORT
-#    - name: SMTP_SSL
-#      valueFrom:
-#        configMapKeyRef:
-#          name: mastodon-env
-#          key: SMTP_SSL
-#    - name: SMTP_TLS
-#      valueFrom:
-#        configMapKeyRef:
-#          name: mastodon-env
-#          key: SMTP_TLS
-#    - name: SMTP_ENABLE_STARTTLS_AUTO
-#      valueFrom:
-#        configMapKeyRef:
-#          name: mastodon-env
-#          key: SMTP_ENABLE_STARTTLS_AUTO
-#    - name: SMTP_OPENSSL_VERIFY_MODE
-#      valueFrom:
-#        configMapKeyRef:
-#          name: mastodon-env
-#          key: SMTP_OPENSSL_VERIFY_MODE
-    - name: SMTP_DELIVERY_METHOD
-      valueFrom:
-        configMapKeyRef:
-          name: mastodon-env
-          key: SMTP_DELIVERY_METHOD
-    - name: SESSION_RETENTION_PERIOD
-      valueFrom:
-        configMapKeyRef:
-          name: mastodon-env
-          key: SESSION_RETENTION_PERIOD
-    - name: VAPID_PUBLIC_KEY
-      valueFrom:
-        configMapKeyRef:
-          name: mastodon-env
-          key: VAPID_PUBLIC_KEY
-    - name: SMTP_SERVER
-      valueFrom:
-        configMapKeyRef:
-          name: mastodon-env
-          key: SMTP_SERVER
-    - name: VAPID_PRIVATE_KEY
-      valueFrom:
-        configMapKeyRef:
-          name: mastodon-env
-          key: VAPID_PRIVATE_KEY
-    - name: OTP_SECRET
-      valueFrom:
-        configMapKeyRef:
-          name: mastodon-env
-          key: OTP_SECRET
-    image: docker.io/tootsuite/mastodon:v3.5.3
+    envFrom:
+    - configMapRef:
+        name: mastodon-env
+        optional: false
+    image: docker.io/tootsuite/mastodon:v4.2.8
     name: web
     resources: {}
     securityContext:
@@ -452,33 +144,20 @@ spec:
     - mountPath: /mastodon/public/system
       name: mastodon-vol-pubsys-pvc
   restartPolicy: Never
-  # Volumes for the various data you need persistent.  I used NFS volumes, you can use whatever, just make sure the names match what you define below
-  ### COMMENT THESE OUT OF YOU ARE USING LOCAL STORAGE INSTEAD OF PODMAN VOLUMES ###
+  # Volumes for the various data you need persistent.  
+  ###These are hostpaths, but you can use volumes as well, you'll just need to replace these definitions with your volumes. ###
   volumes:
   - name: mastodon-vol-db-pvc
-    persistentVolumeClaim:
-      claimName: mastodon-vol-db
+    hostPath: 
+      path: /srv/container-data/mastodon/db
+      type: Directory 
   - name: mastodon-vol-redis-pvc
-    persistentVolumeClaim:
-      claimName: mastodon-vol-redis
+    hostPath: 
+      path: /srv/container-data/mastodon/redis
+      type: Directory 
   - name: mastodon-vol-pubsys-pvc
-    persistentVolumeClaim:
-      claimName: mastodon-vol-pubsys
-
-# Below this line are local directory "hostpath" volumes created to mimmic the volume defs if you're using local storage instead.
-#  volumes:
-#  - hostPath:
-#      path: /srv/mastodon/db/
-#      type: Directory
-#    name: mastodon-vol-db-pvc
-#  - hostPath:
-#      path: /srv/mastodon/redis/
-#      type: Directory
-#    name: mastodon-vol-redis-pvc
-#  - hostPath:
-#      path: /srv/mastodon/pubsys/
-#      type: Directory
-#    name: mastodon-vol-pubsys-pvc
-
+    hostPath: 
+      path: /srv/container-data/mastodon/pubsys
+      type: Directory 
 status: {}
 
