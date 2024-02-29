@@ -12,13 +12,13 @@ You will need to decide how you would like to host mastodon's persistent data (d
 
 I used the following how-to as a reference to get mastodon up and running, but of course ditched the docker/docker-compose stuff and leveraged my own podman knowledge to translate it.  
 
-[https://www.linode.com/docs/guides/install-mastodon-server-on-centos-stream/]
+<https://www.linode.com/docs/guides/install-mastodon-server-on-centos-stream/>
 
 For kubernetes, i think you'll need to define some way to manage ingress, as I did not do that in the pod, I run an external reverse proxy for things like ssl and web termination.  
 
 ## Oauth and Vapid keys
 
-In [https://www.linode.com/docs/guides/install-mastodon-server-on-centos-stream/](the howto above), there is information on how to generate the OAuth and Vapid keys that you will rquire (these go into the configmap once generated)
+In (the howto above)[https://www.linode.com/docs/guides/install-mastodon-server-on-centos-stream/], there is information on how to generate the OAuth and Vapid keys that you will rquire (these go into the configmap once generated)
 
 ## File placement, and systemd
 
